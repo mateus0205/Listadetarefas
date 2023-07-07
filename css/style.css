@@ -1,11 +1,12 @@
-body{
+body {
     background: #000;
     color: #fff;
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 1rem;
 }
-.conteudo{
+
+.conteudo {
     margin: 0 auto;
     width: 100%;
     max-width: 450px;
@@ -15,13 +16,17 @@ body{
     padding: 55px;
     border-radius: 12px;
 }
-.topo{
+
+.topo {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     margin-bottom: 50px;
 }
-.topo input{
-    width: 350px;
+
+.topo input {
+    width: 100%;
+    max-width: 350px;
     padding: 15px;
     border-radius: 12px;
     border: 1px solid #191818;
@@ -30,26 +35,24 @@ body{
     background: #191818;
     color: #fff;
 }
-.topo button{
-    width: 45px;
+
+.topo button {
+    flex-basis: 45px;
     padding: 15px;
     border-radius: 12px;
     border: 1px solid #191818;
     background: #191818;
     color: #fff;
     outline: none;
+}
 
-}
-.topo button:hover{
-    background: #1f1e1e;
-    cursor: pointer;
-}
-#listaTarefas{
+#listaTarefas {
     list-style-type: none;
     padding: 0;
     margin: 0;
 }
-#listaTarefas li{
+
+#listaTarefas li {
     padding: 15px;
     border-radius: 12px;
     border: 1px solid #191818;
@@ -57,10 +60,12 @@ body{
     color: #fff;
     margin-bottom: 10px;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
 }
-.btnAcao{
+
+.btnAcao {
     border-radius: 20px;
     border: 1px solid #191818;
     width: 38px;
@@ -70,36 +75,30 @@ body{
     background: #2b2a2a;
     color: #fff;
 }
-.btnAcao:hover{
-    background: #3c3a3a;
-}
 
-.textoTarefa{
+.textoTarefa {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    width: 290px;
+    width: 70%;
 }
 
-#janelaEdicao{
+#janelaEdicao {
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, 0%);
+    transform: translate(-50%, -50%);
     padding: 20px;
     background: #191818;
     border: 1px solid #2f2e2e;
-    width: 415px;
+    width: 90%;
+    max-width: 415px;
     border-radius: 12px;
     z-index: 200;
     display: none;
 }
 
-#janelaEdicao.abrir{
-    display: block !important;
-}
-
-#janelaEdicaoFundo{
+#janelaEdicaoFundo {
     position: fixed;
     top: 0;
     background-color: #000;
@@ -109,15 +108,10 @@ body{
     z-index: 100;
     right: 0;
     display: none;
-
 }
 
-#janelaEdicaoFundo.abrir{
-    display: block !important;
-}
-
-#janelaEdicaoBtnFechar{
-    position:  absolute;
+#janelaEdicaoBtnFechar {
+    position: absolute;
     top: 15px;
     right: 15px;
     width: 30px;
@@ -130,23 +124,22 @@ body{
     cursor: pointer;
 }
 
-form{
+form {
     width: 100%;
     margin-top: 20px;
-
 }
 
-.frm-linha{
+.frm-linha {
     display: flex;
     flex-direction: column;
     margin-bottom: 20px;
 }
 
-.frm-linha label{
+.frm-linha label {
     margin-bottom: 7px;
 }
 
-.frm-linha input{
+.frm-linha input {
     padding: 15px;
     border-radius: 12px;
     border: 1px solid #191818;
@@ -156,7 +149,7 @@ form{
     color: #fff;
 }
 
-.frm-linha button{
+.frm-linha button {
     width: 100%;
     padding: 7px;
     border-radius: 12px;
@@ -170,6 +163,25 @@ form{
     font-size: 1.3rem;
     outline: none;
 }
-.frm-linha button:hover{
+
+.frm-linha button:hover {
     background: #3c3a3a;
+}
+
+/* Estilos responsivos */
+
+@media screen and (max-width: 600px) {
+    .conteudo {
+        padding: 20px;
+    }
+
+    .topo input {
+        max-width: none;
+        width: 100%;
+    }
+
+    #janelaEdicao {
+        width: 90%;
+        max-width: 100%;
+    }
 }
