@@ -11,7 +11,6 @@ let inputTarefaNomeEdicao = document.querySelector('#inputTarefaNomeEdicao');
 const qtdIdsDisponiveis = Number.MAX_VALUE;
 
 inputNovaTarefa.addEventListener('keypress', (e) => {
-
     if (e.keyCode == 13) {
         let tarefa = {
             checkbox: false,
@@ -25,28 +24,21 @@ inputNovaTarefa.addEventListener('keypress', (e) => {
 janelaEdicaoBtnFechar.addEventListener('click', (e) => {
     alternarJanelaEdicao();
 });
-
 btnAddTarefa.addEventListener('click', (e) => {
-
     let tarefa = {
         nome: inputNovaTarefa.value,
         id: gerarIdV2(),
     }
     adicionarTarefa(tarefa);
 });
-
 btnAtualizarTarefa.addEventListener('click', (e) => {
     e.preventDefault();
-
     let idTarefa = idTarefaEdicao.innerHTML.replace('#', '');
-
     let tarefa = {
         nome: inputTarefaNomeEdicao.value,
         id: idTarefa
     }
-
     let tarefaAtual = document.getElementById('' + idTarefa + '');
-
     if (tarefaAtual) {
         let li = criarTagLI(tarefa);
         listaTarefas.replaceChild(li, tarefaAtual);
@@ -55,53 +47,44 @@ btnAtualizarTarefa.addEventListener('click', (e) => {
         alert('Elemento HTML não encontrado!');
     }
 });
-
 function gerarId() {
     return Math.floor(Math.random() * qtdIdsDisponiveis);
 }
-
 function gerarIdV2() {
     return gerarIdUnico();
 }
-
 function gerarIdUnico() {
-
-    // debugger;
     let itensDaLista = document.querySelector('#listaTarefas').children;
     let idsGerados = [];
-
     for (let i = 0; i < itensDaLista.length; i++) {
         idsGerados.push(itensDaLista[i].id);
     }
-
     let contadorIds = 0;
     let id = gerarId();
-
     while (contadorIds <= qtdIdsDisponiveis &&
         idsGerados.indexOf(id.toString()) > -1) {
         id = gerarId();
         contadorIds++;
-
         if (contadorIds >= qtdIdsDisponiveis) {
             alert("Oops, ficamos sem IDS :/");
             throw new Error("Acabou os IDs :/");
         }
     }
-
     return id;
 }
-
 function adicionarTarefa(tarefa) {
-
     let li = criarTagLI(tarefa);
     listaTarefas.appendChild(li);
     inputNovaTarefa.value = '';
 }
-
 function criarTagLI(tarefa) {
-
     let li = document.createElement('li');
     li.id = tarefa.id;
+    let checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.addEventListener('change', () => {
+        tarefa.checkbox = checkbox.checked;
+    });
 
     let span = document.createElement('span');
     span.classList.add('textoTarefa');
@@ -122,6 +105,7 @@ function criarTagLI(tarefa) {
     div.appendChild(btnEditar);
     div.appendChild(btnExcluir);
 
+    li.appendChild(checkbox);
     li.appendChild(span);
     li.appendChild(div);
     return li;
@@ -139,7 +123,7 @@ function editar(idTarefa) {
 }
 
 function excluir(idTarefa) {
-    let confirmacao = window.confirm('Tem certeza que deseja excluir? ');
+    let confirmacao = window.confirm('Tem certeza que deseja excluir?');
     if (confirmacao) {
         let li = document.getElementById('' + idTarefa + '');
         if (li) {
